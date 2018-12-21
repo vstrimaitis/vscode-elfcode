@@ -1,0 +1,23 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ElfCode",
+	"patterns": [
+        {
+            "name": "meta.preprocessor.string.elfcode",
+            "match": "#.+"
+        },
+        {
+            "name": "keyword.elfcode",
+            "match": "\\b(addr|addi|mulr|muli|banr|bani|borr|bori|setr|seti|gtir|gtri|gtrr|eqir|eqri|eqrr)\\b"
+        },
+        {
+            "name": "constant.numeric",
+            "match": "\\b\\d+\\b"
+        },
+        {
+            "name": "comment.line",
+            "match": "%.*"
+        }
+    ],
+	"scopeName": "source.elfcode"
+}

@@ -1,0 +1,29 @@
+{
+    "name": "elfcode",
+    "displayName": "ElfCode",
+    "description": "Support for the ElfCode language from Advent of Code 2018",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "elfcode",
+            "aliases": ["ElfCode", "elfcode"],
+            "extensions": [".ec",".elf",".elfcode"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "elfcode",
+            "scopeName": "source.elfcode",
+            "path": "./syntaxes/elfcode.tmLanguage.json"
+        }],
+        "snippets": [{
+            "language": "elfcode",
+            "path": "./snippets/snippets.json"
+        }]
+    }
+}

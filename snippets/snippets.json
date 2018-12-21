@@ -1,0 +1,9 @@
+{
+    "addi": {
+        "prefix": "addi",
+        "body": [
+            "addi ${1:register} ${2:value} ${3:destination}"
+        ],
+        "description": "addi command"
+    }
+}
