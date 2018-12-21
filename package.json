@@ -2,7 +2,7 @@
     "name": "elfcode",
     "displayName": "ElfCode",
     "description": "Support for the ElfCode language from Advent of Code 2018",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "vstrimaitis",
     "author": {
         "email": "vstrimaitis@gmail.com",
