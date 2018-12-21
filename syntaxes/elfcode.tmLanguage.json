@@ -4,18 +4,21 @@
 	"patterns": [
         {
             "name": "meta.preprocessor.string.elfcode",
-            "match": "#.+"
+            "match": "#ip (\\d+)",
+            "captures": {
+                "1": { "name": "constant.numeric.elfcode" }
+            }
         },
         {
             "name": "keyword.elfcode",
             "match": "\\b(addr|addi|mulr|muli|banr|bani|borr|bori|setr|seti|gtir|gtri|gtrr|eqir|eqri|eqrr)\\b"
         },
         {
-            "name": "constant.numeric",
+            "name": "constant.numeric.elfcode",
             "match": "\\b\\d+\\b"
         },
         {
-            "name": "comment.line",
+            "name": "comment.line.elfcode",
             "match": "%.*"
         }
     ],
