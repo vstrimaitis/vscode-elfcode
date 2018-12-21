@@ -9,21 +9,50 @@
     "categories": [
         "Programming Languages"
     ],
+    "activationEvents": [
+        "onLanguage:elfcode"
+    ],
+    "main": "./client/out/extension",
     "contributes": {
-        "languages": [{
-            "id": "elfcode",
-            "aliases": ["ElfCode", "elfcode"],
-            "extensions": [".ec",".elf",".elfcode"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "elfcode",
-            "scopeName": "source.elfcode",
-            "path": "./syntaxes/elfcode.tmLanguage.json"
-        }],
-        "snippets": [{
-            "language": "elfcode",
-            "path": "./snippets/snippets.json"
-        }]
+        "languages": [
+            {
+                "id": "elfcode",
+                "aliases": [
+                    "ElfCode",
+                    "elfcode"
+                ],
+                "extensions": [
+                    ".ec",
+                    ".elf",
+                    ".elfcode"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "elfcode",
+                "scopeName": "source.elfcode",
+                "path": "./syntaxes/elfcode.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "elfcode",
+                "path": "./snippets/snippets.json"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "cd client && npm run update-vscode && cd .. && npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
+        "postinstall": "cd client && npm install && cd ../server && npm install && cd .."
+    },
+    "devDependencies": {
+        "typescript": "^3.1.4",
+        "tslint": "^5.8.0",
+        "@types/node": "^8.10.25",
+        "@types/mocha": "^2.2.42"
     }
 }
