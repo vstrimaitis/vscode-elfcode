@@ -35,12 +35,6 @@
                 "scopeName": "source.elfcode",
                 "path": "./syntaxes/elfcode.tmLanguage.json"
             }
-        ],
-        "snippets": [
-            {
-                "language": "elfcode",
-                "path": "./snippets/snippets.json"
-            }
         ]
     },
     "scripts": {

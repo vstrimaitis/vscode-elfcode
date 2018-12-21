@@ -34,6 +34,7 @@ export const validateTextDocument = async (connection: Connection, textDocument:
     const text = textDocument.getText();
     const lines = text.split("\n");
     const diagnostics: Diagnostic[] = [];
+    let isFirstLine = true;
     for(let i = 0; i < lines.length; i++) {
         let line = lines[i];
         if (line.indexOf("%") !== -1) {
@@ -42,48 +43,73 @@ export const validateTextDocument = async (connection: Connection, textDocument:
         if (!line || /^\s+$/.test(line)) {
             continue;
         }
-        const tokens = [];
-        const pattern = /\b\S+\b/g;
-        let m: RegExpExecArray | null;
-        while ((m = pattern.exec(line))) {
-            tokens.push({text: m[0], start: m.index});
-        }
-        
-        const info = {
-            start: -1,
-            end: -1,
-            message: ""
-        };
         const baseOffset = textDocument.offsetAt({line: i, character: 0});
-        if (tokens.length !== 4) {
-            info.start = 0;
-            info.end = lines[i].length;
-            info.message = `Each operation should contain exactly three operands`;
-        }
-        else if (!keywordExists(tokens[0].text)) {
-            info.start = tokens[0].start;
-            info.end = tokens[0].start + tokens[0].text.length;
-            info.message = `Unknown operation ${tokens[0].text}`;
-        } else {
-            for (let num = 1; num < 4; num++) {
-                if(isNaN(tokens[num].text as any) || Number.parseInt(tokens[num].text) < 0) {
-                    info.start = tokens[num].start;
-                    info.end = tokens[num].start + tokens[num].text.length;
-                    info.message = `Each value must be a non-negative integer`;
-                    break;
-                }
-            }
-        }
-        if (info.start !== -1) {
+        if (isFirstLine && !line.trim().startsWith("#ip")) {
             diagnostics.push({
                 severity: DiagnosticSeverity.Error,
                 range: {
-                    start: textDocument.positionAt(baseOffset+info.start),
-                    end: textDocument.positionAt(baseOffset + info.end)
+                    start: textDocument.positionAt(baseOffset+0),
+                    end: textDocument.positionAt(baseOffset + lines[i].length)
                 },
-                message: info.message,
+                message: "The first line must declare which register is bound to the instruction pointer",
                 source: "elfcode"
             });
+            break;
+        } else if(!isFirstLine && line.trim().startsWith("#ip")) {
+            diagnostics.push({
+                severity: DiagnosticSeverity.Error,
+                range: {
+                    start: textDocument.positionAt(baseOffset+0),
+                    end: textDocument.positionAt(baseOffset + lines[i].length)
+                },
+                message: "Only the first line can begin with `#ip`",
+                source: "elfcode"
+            });
+        } else if(isFirstLine) {
+            isFirstLine = false;
+        } else {
+            const tokens = [];
+            const pattern = /\b\S+\b/g;
+            let m: RegExpExecArray | null;
+            while ((m = pattern.exec(line))) {
+                tokens.push({text: m[0], start: m.index});
+            }
+            
+            const info = {
+                start: -1,
+                end: -1,
+                message: ""
+            };
+            if (tokens.length !== 4) {
+                info.start = 0;
+                info.end = lines[i].length;
+                info.message = `Each operation should contain exactly three operands`;
+            }
+            else if (!keywordExists(tokens[0].text)) {
+                info.start = tokens[0].start;
+                info.end = tokens[0].start + tokens[0].text.length;
+                info.message = `Unknown operation ${tokens[0].text}`;
+            } else {
+                for (let num = 1; num < 4; num++) {
+                    if(isNaN(tokens[num].text as any) || Number.parseInt(tokens[num].text) < 0) {
+                        info.start = tokens[num].start;
+                        info.end = tokens[num].start + tokens[num].text.length;
+                        info.message = `Each value must be a non-negative integer`;
+                        break;
+                    }
+                }
+            }
+            if (info.start !== -1) {
+                diagnostics.push({
+                    severity: DiagnosticSeverity.Error,
+                    range: {
+                        start: textDocument.positionAt(baseOffset+info.start),
+                        end: textDocument.positionAt(baseOffset + info.end)
+                    },
+                    message: info.message,
+                    source: "elfcode"
+                });
+            }
         }
     }
     connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
