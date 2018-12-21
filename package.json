@@ -3,6 +3,15 @@
     "displayName": "ElfCode",
     "description": "Support for the ElfCode language from Advent of Code 2018",
     "version": "0.0.1",
+    "author": {
+        "email": "vstrimaitis@gmail.com",
+        "name": "Vytautas Strimaitis",
+        "url": "https://vstrimaitis.github.io/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vstrimaitis/elfcode-extension"
+    },
     "engines": {
         "vscode": "^1.30.0"
     },
