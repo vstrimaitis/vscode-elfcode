@@ -1,65 +1,13 @@
-# elfcode README
+# ElfCode Language Support for Visual Studio Code
 
-This is the README for your extension "elfcode". After writing up a brief description, we recommend including the following sections.
+This extension provides support for the ElfCode language from Advent of Code 2018. The actual language is described [here](https://adventofcode.com/2018/day/16) and [here](https://adventofcode.com/2018/day/19). The only thing I added is the ability to add line comments, which start with a percentage sign (`%`).
 
-## Features
+The extension currently supports:
+* Syntax highlighting
+* Code snippets
+* Some source code validation
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## But why?
+In the spirit of Christmas I decided to try out something new. I have never created a vscode extension before and I saw ElfCode as a pretty good opportunity to learn something new, since the language is quite simple. So I took the time to actually make this, don't judge me :)
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+I am also interested in actually making the code run with a debugger or something. I started looking into it but haven't had the time to finish yet. Maybe I'll come back to it a bit later.
